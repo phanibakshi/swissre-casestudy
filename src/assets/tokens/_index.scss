@@ -1,0 +1,223 @@
+// Design tokens — CRM Dashboard (Figma) source of truth
+// All colors live here; components consume via var(--color-*) only.
+
+// ─── Base ───────────────────────────────────────────────────────────────────
+$color-white: #ffffff;
+$color-black: #000000;
+
+// ─── Text ───────────────────────────────────────────────────────────────────
+$color-text-primary: #292d32;
+$color-text-muted: #b5b7c0;
+$color-text-secondary: #7e7e7e;
+$color-text-emphasis: #3d3c42;
+$color-text-on-primary: #ffffff;
+
+// ─── Brand / accent (pagination, links, active nav) ─────────────────────────
+$color-primary: #5932ea;
+$color-primary-hover: #4625d4;
+$color-primary-border: #5932ea;
+
+// ─── Surfaces ───────────────────────────────────────────────────────────────
+$color-surface: #ffffff;
+$color-surface-muted: #f5f5f5;
+$color-surface-page: #fafbff;
+$color-surface-input: #f9fbff;
+
+// ─── Borders ────────────────────────────────────────────────────────────────
+$color-border: #eeeeee;
+$color-border-subtle: #d9dee3;
+
+// ─── Status: active / success ───────────────────────────────────────────────
+$color-success: #008767;
+$color-success-border: #00b087;
+$color-success-bg: rgba(22, 192, 152, 0.38);
+$color-success-light: #16c098;
+
+// ─── Status: inactive / danger ────────────────────────────────────────────────
+$color-danger: #df0404;
+$color-danger-bg: #ffc5c5;
+$color-danger-border: #df0404;
+
+// ─── Pagination ─────────────────────────────────────────────────────────────
+$color-pagination-active-bg: #5932ea;
+$color-pagination-active-border: #5932ea;
+$color-pagination-active-text: #ffffff;
+$color-pagination-inactive-bg: #f5f5f5;
+$color-pagination-inactive-border: #eeeeee;
+$color-pagination-inactive-text: #404b52;
+
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
+$color-sidebar-active-bg: rgba(89, 50, 234, 0.08);
+$color-sidebar-pro-start: #5932ea;
+$color-sidebar-pro-end: #7c5cfc;
+$sidebar-nav-height: 2.875rem;
+$sidebar-width-collapsed: 6.375rem;
+$sidebar-icon-hit: 2.875rem;
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+$header-height: 3.5rem;
+$sidebar-width: 19.125rem;
+$content-max-width: 90rem;
+
+// ─── Sizing (rem base: 16px) ──────────────────────────────────────────────────
+$border-width: 0.0625rem;
+$outline-width: 0.125rem;
+$outline-offset: 0.0625rem;
+$table-row-height: 3.0625rem;
+$input-height: 2.375rem;
+$input-width: 13.5rem;
+$icon-size: 1.5rem;
+$icon-size-sm: 1rem;
+$avatar-size: 2.625rem;
+$brand-name-size: 1.625rem;
+$brand-logo-size: 2.3125rem;
+
+// ─── Radius ───────────────────────────────────────────────────────────────────
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 0.625rem;
+$radius-card: 1.875rem;
+
+// ─── Stats KPI card (Figma Earning frame) ─────────────────────────────────────
+$color-stat-icon-bg: #d3ffe8;
+$color-stat-icon: #00b087;
+$color-stat-avatar-3: #ff9871;
+$color-stat-avatar-4: #5932ea;
+$color-stat-avatar-5: #16c098;
+$stat-icon-size: 5.25rem;
+$stat-icon-inner-size: 2.625rem;
+$stat-trend-icon-size: 1.25rem;
+$stat-avatar-size: 1.625rem;
+$stats-card-height: 9.4375rem;
+
+// ─── Shadows ──────────────────────────────────────────────────────────────────
+$shadow-card: 0 0.625rem 3.75rem rgba(226, 236, 249, 0.5);
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+$font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.375rem;
+
+// ─── Spacing ──────────────────────────────────────────────────────────────────
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-6: 1.5rem;
+$space-8: 2rem;
+
+// ─── Motion ───────────────────────────────────────────────────────────────────
+$transition-fast: 150ms ease;
+
+:root {
+  // Base
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
+
+  // Text
+  --color-text: #{$color-text-primary};
+  --color-text-primary: #{$color-text-primary};
+  --color-text-muted: #{$color-text-muted};
+  --color-text-secondary: #{$color-text-secondary};
+  --color-text-emphasis: #{$color-text-emphasis};
+  --color-text-on-primary: #{$color-text-on-primary};
+
+  // Brand
+  --color-primary: #{$color-primary};
+  --color-primary-hover: #{$color-primary-hover};
+  --color-primary-border: #{$color-primary-border};
+
+  // Surfaces
+  --color-surface: #{$color-surface};
+  --color-surface-muted: #{$color-surface-muted};
+  --color-surface-page: #{$color-surface-page};
+  --color-surface-input: #{$color-surface-input};
+
+  // Borders
+  --color-border: #{$color-border};
+  --color-border-subtle: #{$color-border-subtle};
+
+  // Status
+  --color-success: #{$color-success};
+  --color-success-border: #{$color-success-border};
+  --color-success-bg: #{$color-success-bg};
+  --color-success-light: #{$color-success-light};
+  --color-danger: #{$color-danger};
+  --color-danger-bg: #{$color-danger-bg};
+  --color-danger-border: #{$color-danger-border};
+
+  // Pagination
+  --color-pagination-active-bg: #{$color-pagination-active-bg};
+  --color-pagination-active-border: #{$color-pagination-active-border};
+  --color-pagination-active-text: #{$color-pagination-active-text};
+  --color-pagination-inactive-bg: #{$color-pagination-inactive-bg};
+  --color-pagination-inactive-border: #{$color-pagination-inactive-border};
+  --color-pagination-inactive-text: #{$color-pagination-inactive-text};
+
+  // Sidebar
+  --color-sidebar-active-bg: #{$color-sidebar-active-bg};
+  --color-sidebar-pro-start: #{$color-sidebar-pro-start};
+  --color-sidebar-pro-end: #{$color-sidebar-pro-end};
+  --sidebar-nav-height: #{$sidebar-nav-height};
+  --sidebar-width-collapsed: #{$sidebar-width-collapsed};
+  --sidebar-icon-hit: #{$sidebar-icon-hit};
+
+  // Layout
+  --header-height: #{$header-height};
+  --sidebar-width: #{$sidebar-width};
+  --content-max-width: #{$content-max-width};
+  --stats-card-height: #{$stats-card-height};
+
+  // Radius
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-card: #{$radius-card};
+
+  // Sizing
+  --border-width: #{$border-width};
+  --outline-width: #{$outline-width};
+  --outline-offset: #{$outline-offset};
+  --table-row-height: #{$table-row-height};
+  --input-height: #{$input-height};
+  --input-width: #{$input-width};
+  --icon-size: #{$icon-size};
+  --icon-size-sm: #{$icon-size-sm};
+  --avatar-size: #{$avatar-size};
+  --brand-name-size: #{$brand-name-size};
+  --brand-logo-size: #{$brand-logo-size};
+  --shadow-card: #{$shadow-card};
+
+  // Stats
+  --color-stat-icon-bg: #{$color-stat-icon-bg};
+  --color-stat-icon: #{$color-stat-icon};
+  --color-stat-avatar-3: #{$color-stat-avatar-3};
+  --color-stat-avatar-4: #{$color-stat-avatar-4};
+  --color-stat-avatar-5: #{$color-stat-avatar-5};
+  --stat-icon-size: #{$stat-icon-size};
+  --stat-icon-inner-size: #{$stat-icon-inner-size};
+  --stat-trend-icon-size: #{$stat-trend-icon-size};
+  --stat-avatar-size: #{$stat-avatar-size};
+
+  // Typography
+  --font-sans: #{$font-sans};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+
+  // Spacing
+  --space-1: #{$space-1};
+  --space-2: #{$space-2};
+  --space-3: #{$space-3};
+  --space-4: #{$space-4};
+  --space-6: #{$space-6};
+  --space-8: #{$space-8};
+
+  // Motion
+  --transition-fast: #{$transition-fast};
+}
