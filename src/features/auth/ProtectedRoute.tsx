@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import type { Permission } from '@/types/rbac'
-import { usePermissions } from '@/features/auth/use-permissions'
+import { usePermissions } from '@/features/auth/auth-context'
 
 type ProtectedRouteProps = {
   permission: Permission

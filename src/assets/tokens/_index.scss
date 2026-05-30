@@ -78,18 +78,6 @@ $radius-md: 0.5rem;
 $radius-lg: 0.625rem;
 $radius-card: 1.875rem;
 
-// ─── Stats KPI card (Figma Earning frame) ─────────────────────────────────────
-$color-stat-icon-bg: #d3ffe8;
-$color-stat-icon: #00b087;
-$color-stat-avatar-3: #ff9871;
-$color-stat-avatar-4: #5932ea;
-$color-stat-avatar-5: #16c098;
-$stat-icon-size: 5.25rem;
-$stat-icon-inner-size: 2.625rem;
-$stat-trend-icon-size: 1.25rem;
-$stat-avatar-size: 1.625rem;
-$stats-card-height: 9.4375rem;
-
 // ─── Shadows ──────────────────────────────────────────────────────────────────
 $shadow-card: 0 0.625rem 3.75rem rgba(226, 236, 249, 0.5);
 
@@ -169,7 +157,6 @@ $transition-fast: 150ms ease;
   --header-height: #{$header-height};
   --sidebar-width: #{$sidebar-width};
   --content-max-width: #{$content-max-width};
-  --stats-card-height: #{$stats-card-height};
 
   // Radius
   --radius-sm: #{$radius-sm};
@@ -190,17 +177,6 @@ $transition-fast: 150ms ease;
   --brand-name-size: #{$brand-name-size};
   --brand-logo-size: #{$brand-logo-size};
   --shadow-card: #{$shadow-card};
-
-  // Stats
-  --color-stat-icon-bg: #{$color-stat-icon-bg};
-  --color-stat-icon: #{$color-stat-icon};
-  --color-stat-avatar-3: #{$color-stat-avatar-3};
-  --color-stat-avatar-4: #{$color-stat-avatar-4};
-  --color-stat-avatar-5: #{$color-stat-avatar-5};
-  --stat-icon-size: #{$stat-icon-size};
-  --stat-icon-inner-size: #{$stat-icon-inner-size};
-  --stat-trend-icon-size: #{$stat-trend-icon-size};
-  --stat-avatar-size: #{$stat-avatar-size};
 
   // Typography
   --font-sans: #{$font-sans};

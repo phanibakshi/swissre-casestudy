@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { Permission } from '@/types/rbac'
-import { usePermissions } from './use-permissions'
+import { usePermissions } from './auth-context'
 
 type CanProps = {
   permission: Permission

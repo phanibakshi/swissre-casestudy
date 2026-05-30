@@ -1,0 +1,159 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6) var(--space-8);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.subtitle {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-success-light);
+}
+
+.toolbar {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--input-height);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-input);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.sortLabel {
+  white-space: nowrap;
+}
+
+.sortSelect {
+  border: none;
+  background: transparent;
+  color: var(--color-text-emphasis);
+  font-weight: 600;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.tableWrap {
+  border-top: var(--border-width) solid var(--color-border);
+  max-height: calc(var(--table-row-height) * 9);
+  overflow: auto;
+}
+
+.colClaimant {
+  width: 10rem;
+}
+
+.colChannel {
+  width: 6.25rem;
+}
+
+.colAssignee {
+  width: 8.75rem;
+}
+
+.colStatus {
+  width: 6.25rem;
+}
+
+.colActions {
+  width: 8.75rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.th {
+  padding: var(--space-4) var(--space-2);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  user-select: none;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  background: var(--color-surface);
+  z-index: 1;
+}
+
+.thSortable {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+.sortIndicator {
+  font-size: var(--font-size-xs);
+}
+
+.row {
+  border-bottom: var(--border-width) solid var(--color-border);
+  cursor: pointer;
+  height: var(--table-row-height);
+
+  &:hover {
+    background: var(--color-surface-page);
+  }
+}
+
+.td {
+  padding: var(--space-3) var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.state {
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.retry {
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.fetching {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
