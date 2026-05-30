@@ -1,6 +1,9 @@
 function getRootFontSizePx(): number {
+  const customBase = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rem-base'))
+  if (Number.isFinite(customBase) && customBase > 0) return customBase
+
   const size = parseFloat(getComputedStyle(document.documentElement).fontSize)
-  return Number.isFinite(size) && size > 0 ? size : 16
+  return Number.isFinite(size) && size > 0 ? size : 14
 }
 
 export function remToPx(rem: number): number {

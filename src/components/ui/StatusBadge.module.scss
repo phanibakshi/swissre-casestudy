@@ -15,13 +15,7 @@
   border: var(--border-width) solid var(--color-success-border);
 }
 
-.pending {
-  color: var(--color-text-emphasis);
-  background: var(--color-surface-muted);
-  border: var(--border-width) solid var(--color-border);
-}
-
-.closed {
+.inactive {
   color: var(--color-danger);
   background: var(--color-danger-bg);
   border: var(--border-width) solid var(--color-danger-border);

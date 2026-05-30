@@ -65,24 +65,28 @@
   overflow: auto;
 }
 
-.colClaimant {
+.colCustomerName {
+  width: 9rem;
+}
+
+.colCompany {
+  width: 7rem;
+}
+
+.colPhone {
+  width: 8.5rem;
+}
+
+.colEmail {
   width: 10rem;
 }
 
-.colChannel {
-  width: 6.25rem;
-}
-
-.colAssignee {
-  width: 8.75rem;
+.colCountry {
+  width: 5.5rem;
 }
 
 .colStatus {
   width: 6.25rem;
-}
-
-.colActions {
-  width: 8.75rem;
 }
 
 .table {

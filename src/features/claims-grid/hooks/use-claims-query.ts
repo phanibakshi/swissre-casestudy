@@ -16,7 +16,6 @@ export function useClaimsQuery(params: ClaimsQueryParams) {
           sort: params.sort,
           sortDir: params.sortDir,
           search: params.search,
-          status: params.status,
         }),
         { role: user.role, signal },
       ),

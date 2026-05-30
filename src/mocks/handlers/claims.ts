@@ -11,7 +11,6 @@ function parseClaimsQuery(url: URL): ClaimsQueryParams {
     sort: (url.searchParams.get('sort') as ClaimsSortField) || 'updatedAt',
     sortDir: url.searchParams.get('sortDir') === 'asc' ? 'asc' : 'desc',
     search: url.searchParams.get('search') ?? '',
-    status: (url.searchParams.get('status') as ClaimsQueryParams['status']) ?? '',
   }
 }
 

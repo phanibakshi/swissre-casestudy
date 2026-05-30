@@ -1,6 +1,9 @@
 // Design tokens — CRM Dashboard (Figma) source of truth
 // All colors live here; components consume via var(--color-*) only.
 
+// ─── Rem scale (1rem = 14px) ────────────────────────────────────────────────
+$rem-base: 14px;
+
 // ─── Base ───────────────────────────────────────────────────────────────────
 $color-white: #ffffff;
 $color-black: #000000;
@@ -59,7 +62,7 @@ $header-height: 3.5rem;
 $sidebar-width: 19.125rem;
 $content-max-width: 90rem;
 
-// ─── Sizing (rem base: 16px) ──────────────────────────────────────────────────
+// ─── Sizing (rem base: 14px) ──────────────────────────────────────────────────
 $border-width: 0.0625rem;
 $outline-width: 0.125rem;
 $outline-offset: 0.0625rem;
@@ -101,6 +104,8 @@ $space-8: 2rem;
 $transition-fast: 150ms ease;
 
 :root {
+  --rem-base: #{$rem-base};
+
   // Base
   --color-white: #{$color-white};
   --color-black: #{$color-black};

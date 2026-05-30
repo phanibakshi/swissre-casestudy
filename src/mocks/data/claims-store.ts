@@ -1,17 +1,28 @@
-import type { Claim, ClaimChannel, ClaimStatus, ClaimsQueryParams, ClaimsResponse, ClaimsSortField } from '@/types/claim'
+import type { Claim, ClaimStatus, ClaimsQueryParams, ClaimsResponse, ClaimsSortField } from '@/types/claim'
+import { MOCK_USERS } from '@/mocks/data/users'
 
 export const CLAIMS_TOTAL = 20_000
 
-const CLAIMANTS = [
+const CUSTOMER_NAMES = [
   'Jane Cooper', 'Floyd Miles', 'Ronald Richards', 'Marvin McKinney', 'Jerome Bell',
   'Kathryn Murphy', 'Jacob Jones', 'Kristin Watson', 'Esther Howard', 'Cameron Williamson',
   'Brooklyn Simmons', 'Leslie Alexander', 'Jenny Wilson', 'Robert Fox', 'Devon Lane',
 ]
 
-const ASSIGNEES = ['Demo User', 'View Only', 'Admin User', null] as const
+const COMPANIES = [
+  'Microsoft', 'Yahoo', 'Adobe', 'Tesla', 'Google', 'Apple', 'Amazon', 'Meta', 'Netflix', 'Spotify',
+]
 
-const CHANNELS: ClaimChannel[] = ['email', 'sftp', 'portal', 'api']
-const STATUSES: ClaimStatus[] = ['active', 'pending', 'closed']
+const COUNTRIES = ['USA', 'UK', 'Australia', 'Germany', 'Canada', 'India', 'France', 'Japan']
+
+const ASSIGNEES = [
+  MOCK_USERS.adjuster.name,
+  MOCK_USERS.viewer.name,
+  MOCK_USERS.admin.name,
+  null,
+] as const
+
+const STATUSES: ClaimStatus[] = ['active', 'inactive']
 
 function seededRandom(seed: number) {
   let s = seed
@@ -21,18 +32,29 @@ function seededRandom(seed: number) {
   }
 }
 
+function slugify(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '.').replace(/^\.|\.$/g, '')
+}
+
 export function generateClaim(index: number): Claim {
   const rand = seededRandom(index + 1)
+  const customerName = CUSTOMER_NAMES[index % CUSTOMER_NAMES.length]
+  const company = COMPANIES[Math.floor(rand() * COMPANIES.length)]
+  const country = COUNTRIES[Math.floor(rand() * COUNTRIES.length)]
   const status = STATUSES[Math.floor(rand() * STATUSES.length)]
   const assignee = ASSIGNEES[Math.floor(rand() * ASSIGNEES.length)]
   const daysAgo = Math.floor(rand() * 365)
+  const phone = `+1 (${200 + (index % 800)}) ${100 + (index % 900)}-${String(1000 + (index % 9000)).slice(-4)}`
 
   return {
     id: `CLM-${String(index + 1).padStart(6, '0')}`,
-    claimant: CLAIMANTS[index % CLAIMANTS.length],
-    channel: CHANNELS[Math.floor(rand() * CHANNELS.length)],
-    assignee,
+    customerName,
+    company,
+    phone,
+    email: `${slugify(customerName)}@${slugify(company)}.com`,
+    country,
     status,
+    assignee,
     updatedAt: new Date(Date.now() - daysAgo * 86_400_000).toISOString(),
   }
 }
@@ -48,9 +70,11 @@ function matchesSearch(claim: Claim, search: string): boolean {
   const q = search.toLowerCase()
   return (
     claim.id.toLowerCase().includes(q) ||
-    claim.claimant.toLowerCase().includes(q) ||
-    claim.channel.toLowerCase().includes(q) ||
-    (claim.assignee?.toLowerCase().includes(q) ?? false)
+    claim.customerName.toLowerCase().includes(q) ||
+    claim.company.toLowerCase().includes(q) ||
+    claim.phone.includes(q) ||
+    claim.email.toLowerCase().includes(q) ||
+    claim.country.toLowerCase().includes(q)
   )
 }
 
@@ -77,7 +101,6 @@ export function queryClaims(
   for (let i = 0; i < CLAIMS_TOTAL; i++) {
     const claim = getClaimByIndex(i)
     if (!matchesRole(claim, role, userName)) continue
-    if (params.status && claim.status !== params.status) continue
     if (!matchesSearch(claim, params.search)) continue
     matchingIndices.push(i)
   }

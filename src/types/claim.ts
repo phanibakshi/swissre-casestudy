@@ -1,17 +1,25 @@
-export type ClaimStatus = 'active' | 'pending' | 'closed'
-
-export type ClaimChannel = 'email' | 'sftp' | 'portal' | 'api'
+export type ClaimStatus = 'active' | 'inactive'
 
 export type Claim = {
   id: string
-  claimant: string
-  channel: ClaimChannel
-  assignee: string | null
+  customerName: string
+  company: string
+  phone: string
+  email: string
+  country: string
   status: ClaimStatus
+  assignee: string | null
   updatedAt: string
 }
 
-export type ClaimsSortField = 'claimant' | 'channel' | 'assignee' | 'status' | 'updatedAt'
+export type ClaimsSortField =
+  | 'customerName'
+  | 'company'
+  | 'phone'
+  | 'email'
+  | 'country'
+  | 'status'
+  | 'updatedAt'
 
 export type ClaimsQueryParams = {
   page: number
@@ -19,7 +27,6 @@ export type ClaimsQueryParams = {
   sort: ClaimsSortField
   sortDir: 'asc' | 'desc'
   search: string
-  status: ClaimStatus | ''
 }
 
 export type ClaimsResponse = {

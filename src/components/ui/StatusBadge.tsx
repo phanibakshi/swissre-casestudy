@@ -3,8 +3,7 @@ import styles from './StatusBadge.module.scss'
 
 const LABELS: Record<ClaimStatus, string> = {
   active: 'Active',
-  pending: 'Pending',
-  closed: 'Closed',
+  inactive: 'Inactive',
 }
 
 type StatusBadgeProps = {

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import type { ClaimStatus, ClaimsSortField } from '@/types/claim'
+import type { ClaimsSortField } from '@/types/claim'
 
 const DEFAULTS = {
   page: 1,
@@ -8,7 +8,6 @@ const DEFAULTS = {
   sort: 'updatedAt' as ClaimsSortField,
   sortDir: 'desc' as const,
   search: '',
-  status: '' as ClaimStatus | '',
 }
 
 export function useClaimsParams() {
@@ -21,7 +20,6 @@ export function useClaimsParams() {
       sort: (searchParams.get('sort') as ClaimsSortField) || DEFAULTS.sort,
       sortDir: searchParams.get('sortDir') === 'asc' ? ('asc' as const) : ('desc' as const),
       search: searchParams.get('search') ?? DEFAULTS.search,
-      status: (searchParams.get('status') as ClaimStatus | '') || DEFAULTS.status,
     }),
     [searchParams],
   )
@@ -36,8 +34,6 @@ export function useClaimsParams() {
       next.set('sortDir', merged.sortDir)
       if (merged.search) next.set('search', merged.search)
       else next.delete('search')
-      if (merged.status) next.set('status', merged.status)
-      else next.delete('status')
       return next
     })
   }

@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   flexRender,
@@ -12,19 +12,30 @@ import { useClaimsColumns } from '@/features/claims-grid/columns'
 import { useClaimsParams } from '@/features/claims-grid/hooks/use-claims-params'
 import { useClaimsQuery } from '@/features/claims-grid/hooks/use-claims-query'
 import { getTableRowHeightPx, pxToRem } from '@/lib/layout/rem'
-import type { Claim, ClaimsSortField } from '@/types/claim'
+import type { ClaimsSortField } from '@/types/claim'
 import styles from './ClaimsGrid.module.scss'
 
 const COL_CLASS: Record<string, string | undefined> = {
-  claimant: styles.colClaimant,
-  channel: styles.colChannel,
-  assignee: styles.colAssignee,
+  customerName: styles.colCustomerName,
+  company: styles.colCompany,
+  phone: styles.colPhone,
+  email: styles.colEmail,
+  country: styles.colCountry,
   status: styles.colStatus,
-  actions: styles.colActions,
 }
+const SORTABLE_COLUMNS: ClaimsSortField[] = [
+  'customerName',
+  'company',
+  'phone',
+  'email',
+  'country',
+  'status',
+  'updatedAt',
+]
 const SORT_OPTIONS: { label: string; value: ClaimsSortField }[] = [
   { label: 'Newest', value: 'updatedAt' },
-  { label: 'Claimant', value: 'claimant' },
+  { label: 'Customer', value: 'customerName' },
+  { label: 'Company', value: 'company' },
   { label: 'Status', value: 'status' },
 ]
 
@@ -39,11 +50,7 @@ export function ClaimsGrid() {
     setRowHeightPx(getTableRowHeightPx())
   }, [])
 
-  const onEdit = useCallback((claim: Claim) => alert(`Edit ${claim.id}`), [])
-  const onDelete = useCallback((claim: Claim) => alert(`Delete ${claim.id}`), [])
-  const onAssign = useCallback((claim: Claim) => alert(`Assign ${claim.id}`), [])
-
-  const columns = useClaimsColumns({ onEdit, onDelete, onAssign })
+  const columns = useClaimsColumns()
 
   const sorting: SortingState = [{ id: params.sort, desc: params.sortDir === 'desc' }]
 
@@ -79,7 +86,7 @@ export function ClaimsGrid() {
     <article className={styles.card}>
       <header className={styles.cardHeader}>
         <div>
-          <h2 className={styles.title}>All Claims</h2>
+          <h2 className={styles.title}>All Customers</h2>
           <p className={styles.subtitle}>{activeCount} active on this page</p>
         </div>
         <div className={styles.toolbar}>
@@ -118,9 +125,7 @@ export function ClaimsGrid() {
                 {table.getHeaderGroups().map((hg) => (
                   <tr key={hg.id}>
                     {hg.headers.map((header) => {
-                      const sortable = ['claimant', 'channel', 'assignee', 'status', 'updatedAt'].includes(
-                        header.column.id,
-                      )
+                      const sortable = SORTABLE_COLUMNS.includes(header.column.id as ClaimsSortField)
                       return (
                         <th
                           key={header.id}

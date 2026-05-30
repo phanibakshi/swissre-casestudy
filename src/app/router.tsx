@@ -1,8 +1,14 @@
+import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { AppShell } from '@/components/layout/AppShell'
 import { ProtectedRoute } from '@/features/auth/ProtectedRoute'
 import { ClaimsGrid } from '@/features/claims-grid/ClaimsGrid'
-import { DocumentWorkspacePage } from '@/features/document-workspace/DocumentWorkspacePage'
+
+const DocumentWorkspacePage = lazy(() =>
+  import('@/features/document-workspace/DocumentWorkspacePage').then((m) => ({
+    default: m.DocumentWorkspacePage,
+  })),
+)
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +20,14 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute permission="claims:read" />,
         children: [
           { path: 'claims', element: <ClaimsGrid /> },
-          { path: 'claims/:id/workspace', element: <DocumentWorkspacePage /> },
+          {
+            path: 'claims/:id/workspace',
+            element: (
+              <Suspense fallback={<p>Loading workspace…</p>}>
+                <DocumentWorkspacePage />
+              </Suspense>
+            ),
+          },
         ],
       },
     ],

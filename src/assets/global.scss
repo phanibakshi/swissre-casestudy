@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: var(--rem-base);
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
