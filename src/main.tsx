@@ -7,7 +7,14 @@ import '@/assets/global.scss'
 async function bootstrap() {
   if (import.meta.env.DEV || import.meta.env.VITE_ENABLE_MSW === 'true') {
     const { worker } = await import('@/mocks/browser')
-    await worker.start({ onUnhandledRequest: 'bypass' })
+    const base = import.meta.env.BASE_URL
+    await worker.start({
+      onUnhandledRequest: 'bypass',
+      serviceWorker: {
+        url: `${base}mockServiceWorker.js`,
+        options: { scope: base },
+      },
+    })
   }
 
   createRoot(document.getElementById('root')!).render(
