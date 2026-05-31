@@ -2,7 +2,7 @@ import { GlobalWorkerOptions, getDocument, type PDFDocumentProxy } from 'pdfjs-d
 
 GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).href
 
-export const DOCUMENT_PDF_URL = '/documents/sample.pdf'
+export const DOCUMENT_PDF_URL = `${import.meta.env.BASE_URL}documents/sample.pdf`
 
 let cachedTask: ReturnType<typeof getDocument> | null = null
 let cachedPromise: Promise<PDFDocumentProxy> | null = null
