@@ -1,7 +1,7 @@
-import { http, HttpResponse } from 'msw'
-import { queryClaims } from '@/mocks/data/claims-store'
+import { http, HttpResponse, delay } from 'msw'
+import { CLAIMS_TOTAL, getClaimByIndex, queryClaims } from '@/mocks/data/claims-store'
 import { DEFAULT_MOCK_USER, MOCK_USERS } from '@/mocks/data/users'
-import type { ClaimsQueryParams, ClaimsSortField } from '@/types/claim'
+import type { Claim, ClaimsQueryParams, ClaimsSortField } from '@/types/claim'
 import type { Role } from '@/types/rbac'
 
 function parseClaimsQuery(url: URL): ClaimsQueryParams {
@@ -20,11 +20,50 @@ function roleFromRequest(request: Request): Role {
   return DEFAULT_MOCK_USER.role
 }
 
+function claimIndexFromId(id: string): number | null {
+  const match = /^CLM-(\d+)$/.exec(id)
+  if (!match) return null
+  const index = Number(match[1]) - 1
+  if (index < 0 || index >= CLAIMS_TOTAL) return null
+  return index
+}
+
+function canAccessClaim(claim: Claim, role: Role, userName: string): boolean {
+  if (role === 'admin' || role === 'viewer') return true
+  if (role === 'adjuster') return claim.assignee === null || claim.assignee === userName
+  return true
+}
+
+function documentMetaForClaim(id: string, index: number) {
+  const sizeBytes = 150_000_000 + (index % 850_000_000)
+  return {
+    fileName: `${id}-documents.pdf`,
+    sizeBytes,
+    pageCount: Math.max(1, Math.floor(sizeBytes / 750_000)),
+  }
+}
+
 export const claimsHandlers = [
   http.get('/api/claims', ({ request }) => {
     const role = roleFromRequest(request)
     const user = MOCK_USERS[role]
     const params = parseClaimsQuery(new URL(request.url))
     return HttpResponse.json(queryClaims(params, role, user.name))
+  }),
+
+  http.get('/api/claims/:id', async ({ request, params }) => {
+    await delay(500)
+    const role = roleFromRequest(request)
+    const user = MOCK_USERS[role]
+    const id = params.id as string
+    const index = claimIndexFromId(id)
+    if (index === null) return HttpResponse.json({ message: 'Claim not found' }, { status: 404 })
+
+    const claim = getClaimByIndex(index)
+    if (!canAccessClaim(claim, role, user.name)) {
+      return HttpResponse.json({ message: 'Forbidden' }, { status: 403 })
+    }
+
+    return HttpResponse.json({ claim, document: documentMetaForClaim(id, index) })
   }),
 ]

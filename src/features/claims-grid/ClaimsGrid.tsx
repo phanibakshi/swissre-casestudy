@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-table'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { Pagination } from '@/components/ui/Pagination'
+import { Loader } from '@/components/ui/Loader'
 import { useClaimsColumns } from '@/features/claims-grid/columns'
 import { useClaimsParams } from '@/features/claims-grid/hooks/use-claims-params'
 import { useClaimsQuery } from '@/features/claims-grid/hooks/use-claims-query'
@@ -84,6 +85,7 @@ export function ClaimsGrid() {
 
   return (
     <article className={styles.card}>
+      {isLoading && <Loader message="Loading customers…" />}
       <header className={styles.cardHeader}>
         <div>
           <h2 className={styles.title}>All Customers</h2>
@@ -107,7 +109,6 @@ export function ClaimsGrid() {
         </div>
       </header>
 
-      {isLoading && <p className={styles.state}>Loading claims…</p>}
       {isError && (
         <p className={styles.state}>
           Failed to load claims.{' '}

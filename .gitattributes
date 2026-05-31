@@ -1,0 +1,10 @@
+# Normalize line endings — LF in repo (avoids whitespace-only diffs on Windows)
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary

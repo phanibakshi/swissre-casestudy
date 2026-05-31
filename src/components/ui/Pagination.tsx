@@ -17,7 +17,7 @@ function buildPages(current: number, totalPages: number): (number | 'ellipsis')[
   if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1)
   const pages: (number | 'ellipsis')[] = [1]
   if (current > 3) pages.push('ellipsis')
-  for (let p = Math.max(2, current - 1); p <= Math.min(totalPages - 1, current + 1); p++) {
+  for (let p = Math.max(2, current - 1); p <= Math.min(totalPages - 1, current + 3); p++) {
     pages.push(p)
   }
   if (current < totalPages - 2) pages.push('ellipsis')
