@@ -39,6 +39,24 @@ See [PROJECT_PLAN.md](./PROJECT_PLAN.md) for full phases, tech stack, and build 
 | `npm run lint` | ESLint |
 | `npm run preview` | Preview production build |
 
+## Deploy to GitHub Pages
+
+`npm run deploy` uses [gh-pages](https://github.com/tschaub/gh-pages), which **requires Git** on your machine. If you see `spawn git ENOENT`, Git is not installed or not on your PATH.
+
+**Recommended:** use GitHub Actions (no local Git needed for deploy):
+
+1. Push the repo to GitHub.
+2. **Settings → Pages → Build and deployment → Source:** GitHub Actions.
+3. Push to `main` — `.github/workflows/deploy.yml` builds and deploys `dist`.
+
+Site URL: `https://<your-username>.github.io/swissre-casestudy/`
+
+**Local deploy** (after installing [Git](https://git-scm.com/download/win)):
+
+```bash
+npm run deploy
+```
+
 ## Demo routes
 
 | Route | Description |

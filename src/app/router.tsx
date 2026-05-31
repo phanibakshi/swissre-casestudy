@@ -11,26 +11,29 @@ const DocumentWorkspacePage = lazy(() =>
   })),
 )
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <AppShell />,
-    children: [
-      { index: true, element: <Navigate to="/claims" replace /> },
-      {
-        element: <ProtectedRoute permission="claims:read" />,
-        children: [
-          { path: 'claims', element: <ClaimsGrid /> },
-          {
-            path: 'claims/:id/workspace',
-            element: (
-              <Suspense fallback={<Loader message="Loading workspace…" />}>
-                <DocumentWorkspacePage />
-              </Suspense>
-            ),
-          },
-        ],
-      },
-    ],
-  },
-])
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <AppShell />,
+      children: [
+        { index: true, element: <Navigate to="/claims" replace /> },
+        {
+          element: <ProtectedRoute permission="claims:read" />,
+          children: [
+            { path: 'claims', element: <ClaimsGrid /> },
+            {
+              path: 'claims/:id/workspace',
+              element: (
+                <Suspense fallback={<Loader message="Loading workspace…" />}>
+                  <DocumentWorkspacePage />
+                </Suspense>
+              ),
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  { basename: import.meta.env.BASE_URL.replace(/\/$/, '') || undefined },
+)
