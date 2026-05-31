@@ -41,21 +41,18 @@ See [PROJECT_PLAN.md](./PROJECT_PLAN.md) for full phases, tech stack, and build 
 
 ## Deploy to GitHub Pages
 
-`npm run deploy` uses [gh-pages](https://github.com/tschaub/gh-pages), which **requires Git** on your machine. If you see `spawn git ENOENT`, Git is not installed or not on your PATH.
+Site URL: **https://phanibakshi.github.io/swissre-casestudy/**
 
-**Recommended:** use GitHub Actions (no local Git needed for deploy):
+The deploy workflow failed previously because **`npm ci` failed** in CI — nothing was published, so the site returned 404.
 
-1. Push the repo to GitHub.
-2. **Settings → Pages → Build and deployment → Source:** GitHub Actions.
-3. Push to `main` — `.github/workflows/deploy.yml` builds and deploys `dist`.
+**Steps:**
 
-Site URL: `https://<your-username>.github.io/swissre-casestudy/`
+1. Push these fixes to `main`.
+2. **Settings → Pages → Build and deployment → Source:** choose **GitHub Actions** (not “Deploy from a branch”).
+3. Open **Actions** → **Deploy to GitHub Pages** → confirm the latest run is green.
+4. Wait 1–2 minutes, then open the site URL above.
 
-**Local deploy** (after installing [Git](https://git-scm.com/download/win)):
-
-```bash
-npm run deploy
-```
+`npm run deploy` (local) still needs Git installed; GitHub Actions is the recommended path.
 
 ## Demo routes
 
