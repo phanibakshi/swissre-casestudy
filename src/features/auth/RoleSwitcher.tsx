@@ -2,7 +2,7 @@ import { useAuth } from './auth-context'
 import type { Role } from '@/types/rbac'
 import styles from './RoleSwitcher.module.scss'
 
-const ROLES: Role[] = ['Viewer', 'Adjuster', 'Admin']
+const ROLES: Role[] = ['viewer', 'adjuster', 'admin']
 
 type RoleSwitcherProps = {
   className?: string

@@ -34,12 +34,11 @@ function canAccessClaim(claim: Claim, role: Role, userName: string): boolean {
   return true
 }
 
-function documentMetaForClaim(id: string, index: number) {
-  const sizeBytes = 150_000_000 + (index % 850_000_000)
+function documentMetaForClaim() {
   return {
-    fileName: `${id}-documents.pdf`,
-    sizeBytes,
-    pageCount: Math.max(1, Math.floor(sizeBytes / 750_000)),
+    fileName: 'sample.pdf',
+    sizeBytes: 500,
+    pageCount: 1,
   }
 }
 
@@ -64,6 +63,6 @@ export const claimsHandlers = [
       return HttpResponse.json({ message: 'Forbidden' }, { status: 403 })
     }
 
-    return HttpResponse.json({ claim, document: documentMetaForClaim(id, index) })
+    return HttpResponse.json({ claim, document: documentMetaForClaim() })
   }),
 ]
